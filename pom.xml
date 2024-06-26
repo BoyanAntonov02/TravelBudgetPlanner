@@ -50,12 +50,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Internationalization -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-i18n</artifactId>
-        </dependency>
-
         <!-- Mapping -->
         <dependency>
             <groupId>org.mapstruct</groupId>
