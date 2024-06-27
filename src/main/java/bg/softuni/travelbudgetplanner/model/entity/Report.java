@@ -1,6 +1,8 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity

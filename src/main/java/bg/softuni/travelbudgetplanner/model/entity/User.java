@@ -1,7 +1,8 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
-import javax.persistence.*;
-import java.util.Set;
+import bg.softuni.travelbudgetplanner.model.entity.UserRole;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "users")
@@ -11,21 +12,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "email")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private UserRole role;
+    @Column(nullable = false)
+    private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Trip> trips;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role = UserRole.USER; // Default role
 
     // Getters and Setters
 
@@ -45,14 +43,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -61,19 +51,19 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public UserRole getRole() {
         return role;
     }
 
     public void setRole(UserRole role) {
         this.role = role;
-    }
-
-    public Set<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(Set<Trip> trips) {
-        this.trips = trips;
     }
 }

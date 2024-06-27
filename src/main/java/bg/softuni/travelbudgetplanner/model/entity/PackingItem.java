@@ -1,6 +1,7 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "packing_items")

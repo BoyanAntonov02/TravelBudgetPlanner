@@ -104,6 +104,32 @@ footer {
     margin-top: auto;
 }
 
+.error-messages {
+    margin-top: 20px;
+}
+
+.alert {
+    color: white;
+    background-color: #f44336; /* Red */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.alert-danger {
+    color: white;
+    background-color: #f44336; /* Red */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.is-invalid + .invalid-feedback {
+    display: block;
+}
+
 @media (max-width: 600px) {
     header h1 {
         font-size: 1.5em;
