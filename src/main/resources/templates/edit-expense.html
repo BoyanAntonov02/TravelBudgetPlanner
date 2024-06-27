@@ -1,0 +1,36 @@
+<!-- edit-expense.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Edit Expense</h1>
+</header>
+<main>
+    <form action="/trips/{tripId}/expenses/{expenseId}" method="post">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="transportation">Transportation</option>
+            <option value="accommodation">Accommodation</option>
+            <option value="food">Food</option>
+            <option value="entertainment">Entertainment</option>
+        </select>
+        <button type="submit">Save Changes</button>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>

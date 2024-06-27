@@ -1,0 +1,38 @@
+<!-- reports.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Reports</h1>
+    <nav>
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="/trips/create.html">Create Trip</a>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Generate Report</h2>
+        <form action="/reports" method="post">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+            <button type="submit">Generate Report</button>
+        </form>
+    </section>
+    <section>
+        <h2>Your Reports</h2>
+        <!-- List of reports will go here -->
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>

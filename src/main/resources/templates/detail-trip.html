@@ -1,0 +1,35 @@
+<!-- trip-details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Trip Details</h1>
+    <nav>
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="/trips/{tripId}/edit.html">Edit Trip</a>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Destination: <!-- Destination name here --></h2>
+        <p>Start Date: <!-- Start date here --></p>
+        <p>End Date: <!-- End date here --></p>
+        <p>Budget: <!-- Budget here --></p>
+    </section>
+    <section>
+        <h2>Expenses</h2>
+        <a href="/trips/{tripId}/expenses/create.html">Add Expense</a>
+        <!-- List of expenses will go here -->
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>
