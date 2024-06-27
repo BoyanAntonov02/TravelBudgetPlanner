@@ -1,4 +1,4 @@
-package bg.softuni.travelbudgetplanner.model;
+package bg.softuni.travelbudgetplanner.model.entity;
 
 import javax.persistence.*;
 import java.util.Set;
