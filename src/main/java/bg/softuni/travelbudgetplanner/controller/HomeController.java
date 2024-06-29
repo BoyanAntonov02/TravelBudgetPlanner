@@ -17,15 +17,17 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("title", "Home");
-        model.addAttribute("username", userSession.username());
+    public String notLogged() {
+        if (userSession.isUserLoggedIn()) {
+            return "redirect:/home";
+        }
+
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Login");
-        return "login";
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("title", "Home");
+        return "home";
     }
 }

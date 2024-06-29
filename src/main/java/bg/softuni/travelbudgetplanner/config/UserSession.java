@@ -1,5 +1,6 @@
 package bg.softuni.travelbudgetplanner.config;
 
+import bg.softuni.travelbudgetplanner.model.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -9,25 +10,25 @@ public class UserSession {
     private long id;
     private String username;
 
-    public void login(long id, String username) {
-        this.id = id;
-        this.username = username;
+    public void login(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
     }
 
-    public Long id() {
-        return id;
+    public boolean isUserLoggedIn() {
+        return id != 0;
+    }
+
+    public void logout() {
+        id = 0;
+        username = "";
     }
 
     public String username() {
         return username;
     }
 
-    public boolean isLoggedIn() {
-        return id > 0;
-    }
-
-    public void logout() {
-        id = 0;
-        username = null;
+    public Long userId() {
+        return id;
     }
 }

@@ -1,6 +1,7 @@
 package bg.softuni.travelbudgetplanner.controller;
 
 import bg.softuni.travelbudgetplanner.config.UserSession;
+import bg.softuni.travelbudgetplanner.model.dto.UserLoginDTO;
 import bg.softuni.travelbudgetplanner.model.dto.UserRegisterDTO;
 import bg.softuni.travelbudgetplanner.service.UserService;
 import jakarta.validation.Valid;
@@ -30,7 +31,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        if (userSession.isLoggedIn()) {
+        if (userSession.isUserLoggedIn()) {
             return "redirect:/";
         }
         return "register";
@@ -43,7 +44,7 @@ public class UserController {
             RedirectAttributes redirectAttributes,
             Model model
     ) {
-        if (userSession.isLoggedIn()) {
+        if (userSession.isUserLoggedIn()) {
             return "redirect:/";
         }
 
@@ -68,5 +69,46 @@ public class UserController {
         }
 
         return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String viewLogin(Model model) {
+        if (userSession.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+        model.addAttribute("loginData", new UserLoginDTO()); // Ensure this line is present
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String doLogin(
+            @Valid UserLoginDTO data,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("loginData", data);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.loginData", bindingResult);
+
+            return "redirect:/login";
+        }
+
+        boolean success = userService.login(data);
+
+        if (!success) {
+            redirectAttributes.addFlashAttribute("loginData", data);
+            redirectAttributes.addFlashAttribute("userPassMismatch", true);
+
+            return "redirect:login";
+        }
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/logout")
+    public String logout() {
+        userService.logout();
+        return "redirect:/";
     }
 }

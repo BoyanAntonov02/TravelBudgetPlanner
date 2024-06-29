@@ -1,5 +1,7 @@
 package bg.softuni.travelbudgetplanner.service;
 
+import bg.softuni.travelbudgetplanner.config.UserSession;
+import bg.softuni.travelbudgetplanner.model.dto.UserLoginDTO;
 import bg.softuni.travelbudgetplanner.model.dto.UserRegisterDTO;
 import bg.softuni.travelbudgetplanner.model.entity.User;
 import bg.softuni.travelbudgetplanner.model.entity.UserRole;
@@ -16,11 +18,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserSession userSession;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSession userSession) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userSession = userSession;
     }
 
     public boolean register(UserRegisterDTO data) {
@@ -39,5 +43,29 @@ public class UserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    public boolean login(UserLoginDTO data) {
+        Optional<User> byUsername =
+                userRepository.findByUsername(data.getUsername());
+
+
+        if (byUsername.isEmpty()) {
+            return false;
+        }
+
+        User user = byUsername.get();
+
+        if (!passwordEncoder.matches(data.getPassword(), user.getPassword())) {
+            return false;
+        }
+
+        userSession.login(byUsername.get());
+
+        return true;
+    }
+
+    public void logout() {
+        userSession.logout();
     }
 }

@@ -14,18 +14,68 @@
     <a href="/register">Register</a>
   </nav>
 </header>
-<main>
-  <section>
-    <form action="/api/users/login" method="post">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
+<main class="p-5 align-content-center bg-blur my-register-div">
+  <div class="d-flex justify-content-center">
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+    <div class="row g-3 align-items-center">
 
-      <button type="submit">Login</button>
-    </form>
-  </section>
+      <form
+              th:action="@{/login}"
+              th:method="POST"
+              th:object="${loginData}"
+      >
+
+        <div>
+          <div class="col-auto">
+            <label for="inputUsername" class="col-form-label ">Username</label>
+          </div>
+          <div class="col-auto">
+            <input type="text"
+                   th:field="*{username}"
+                   name="username"
+                   required minlength="4" maxlength="20"
+                   id="inputUsername"
+                   class="form-control"
+                   aria-describedby="usernameHelpInline"
+                   >
+          </div>
+        </div>
+        <div>
+          <div class="col-auto">
+            <label for="inputPassword" class="col-form-label ">Password</label>
+          </div>
+          <div class="col-auto">
+            <input type="password"
+                   th:field="*{password}"
+                   name="password"
+                   required minlength="4" maxlength="20"
+                   id="inputPassword" class="form-control"
+                   aria-describedby="passwordHelpInline"
+                   >
+
+          </div>
+        </div>
+
+        <div class="error-messages mt-3">
+          <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger">
+            <p th:errors="*{username}"></p>
+          </div>
+          <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+            <p th:errors="*{password}"></p>
+          </div>
+          <div th:if="${loginError}" class="alert alert-danger">
+            <p th:text="${loginError}"></p>
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center mt-2">
+          <button class="btn btn-primary btn-block w-50" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
 </main>
 <footer>
   <p>&copy; 2024 Travel Budget Planner</p>
