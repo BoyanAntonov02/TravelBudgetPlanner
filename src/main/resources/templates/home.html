@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Budget Planner - Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <header>
-    <h1>Welcome to Travel Budget Planner</h1>
+    <h1>Welcome!</h1>
     <nav>
-        <form action="/logout" method="post" style="display:inline;">
-            <button type="submit">Logout</button> </form>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class="nav-link" style="border:none; background:none; cursor:pointer; color:blue; text-decoration:underline;">Logout</button>
+        </form>
+
     </nav>
 </header>
 <main>

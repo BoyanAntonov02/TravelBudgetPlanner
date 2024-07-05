@@ -16,8 +16,6 @@ public class UserRegisterDTO {
     @Size(min = 3, message = "Password must be at least 6 characters")
     private String password;
 
-    @NotBlank(message = "Confirm Password is required")
-    private String confirmPassword;
 
     public UserRegisterDTO() {}
 
@@ -45,11 +43,5 @@ public class UserRegisterDTO {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }

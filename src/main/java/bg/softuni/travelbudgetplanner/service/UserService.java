@@ -3,7 +3,7 @@ package bg.softuni.travelbudgetplanner.service;
 import bg.softuni.travelbudgetplanner.config.UserSession;
 import bg.softuni.travelbudgetplanner.model.dto.UserLoginDTO;
 import bg.softuni.travelbudgetplanner.model.dto.UserRegisterDTO;
-import bg.softuni.travelbudgetplanner.model.entity.User;
+import bg.softuni.travelbudgetplanner.model.entity.UserEntity;
 import bg.softuni.travelbudgetplanner.model.entity.UserRole;
 import bg.softuni.travelbudgetplanner.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,13 @@ public class UserService {
     }
 
     public boolean register(UserRegisterDTO data) {
-        Optional<User> existingUser = userRepository.findByUsernameOrEmail(data.getUsername(), data.getEmail());
+        Optional<UserEntity> existingUser = userRepository.findByUsernameOrEmail(data.getUsername(), data.getEmail());
 
         if (existingUser.isPresent()) {
             return false;
         }
 
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setUsername(data.getUsername());
         user.setEmail(data.getEmail());
         user.setPassword(passwordEncoder.encode(data.getPassword()));
@@ -45,27 +45,5 @@ public class UserService {
         return true;
     }
 
-    public boolean login(UserLoginDTO data) {
-        Optional<User> byUsername =
-                userRepository.findByUsername(data.getUsername());
 
-
-        if (byUsername.isEmpty()) {
-            return false;
-        }
-
-        User user = byUsername.get();
-
-        if (!passwordEncoder.matches(data.getPassword(), user.getPassword())) {
-            return false;
-        }
-
-        userSession.login(byUsername.get());
-
-        return true;
-    }
-
-    public void logout() {
-        userSession.logout();
-    }
 }

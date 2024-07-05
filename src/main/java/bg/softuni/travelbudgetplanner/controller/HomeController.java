@@ -1,7 +1,8 @@
 package bg.softuni.travelbudgetplanner.controller;
 
-import bg.softuni.travelbudgetplanner.config.UserSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import bg.softuni.travelbudgetplanner.user.TravelUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private final UserSession userSession;
-
-    @Autowired
-    public HomeController(UserSession userSession) {
-        this.userSession = userSession;
-    }
-
     @GetMapping("/")
-    public String notLogged() {
-        if (userSession.isUserLoggedIn()) {
-            return "redirect:/home";
+    public String home(@AuthenticationPrincipal UserDetails userDetails,
+                       Model model) {
+
+
+        if (userDetails instanceof TravelUserDetails travelUserDetails) {
+            model.addAttribute("welcomeMessage", userDetails.getPassword());
+        } else {
+            model.addAttribute("welcomeMessage", "Anonymous");
         }
 
         return "index";
@@ -27,7 +26,8 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("title", "Home");
         return "home";
     }
+
+
 }
