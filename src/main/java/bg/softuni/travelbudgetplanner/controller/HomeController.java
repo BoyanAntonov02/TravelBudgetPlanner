@@ -29,5 +29,17 @@ public class HomeController {
         return "home";
     }
 
+//    @GetMapping("/dashboard")
+//    public String dashboard(Model model) {
+//        return "dashboard";
+//    }
+
+
+//    @GetMapping("/profile")
+//    public String profile(Model model) {
+//        return "profile";
+//    }
+
+
 
 }

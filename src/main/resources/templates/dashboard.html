@@ -1,29 +1,42 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <header>
     <h1>Dashboard</h1>
     <nav>
-        <a href="/trips/create.html">Create Trip</a>
-        <a href="/profile.html">Profile</a>
-        <a href="/logout">Logout</a>
+        <a href="/trips/create">Create New Trip</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class="nav-link">Logout</button>
+        </form>
     </nav>
 </header>
 <main>
     <section>
         <h2>Your Trips</h2>
-        <!-- List of trips will go here -->
-    </section>
-    <section>
-        <h2>Reports</h2>
-        <!-- List of reports will go here -->
+        <div class="list-group">
+            <div th:each="trip : ${trips}" class="list-group-item">
+                <h3 th:text="${trip.destination}" class="trip-title"></h3>
+                <p>
+                    <span th:text="'Start Date: ' + ${trip.startDate}"></span><br>
+                    <span th:text="'End Date: ' + ${trip.endDate}"></span><br>
+                    <span th:text="'Budget: $' + ${trip.budget}"></span>
+                </p>
+                <div class="button-group">
+                    <a th:href="@{/trips/edit/{id}(id=${trip.id})}" class="btn btn-primary">Edit</a>
+                    <form th:action="@{/trips/delete/{id}(id=${trip.id})}" method="post" style="display:inline;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 <footer>

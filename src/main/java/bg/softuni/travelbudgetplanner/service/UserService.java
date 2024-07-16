@@ -27,6 +27,11 @@ public class UserService {
         this.userSession = userSession;
     }
 
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+    }
+
     public boolean register(UserRegisterDTO data) {
         Optional<UserEntity> existingUser = userRepository.findByUsernameOrEmail(data.getUsername(), data.getEmail());
 
@@ -44,5 +49,8 @@ public class UserService {
         return true;
     }
 
+    public UserEntity getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
 
 }

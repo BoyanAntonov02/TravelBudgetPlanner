@@ -37,14 +37,6 @@ nav a:hover {
     text-decoration: underline;
 }
 
-main {
-    flex: 1;
-    margin: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 section {
     text-align: center;
@@ -154,4 +146,28 @@ footer {
         padding: 12px;
         font-size: 1em;
     }
+
+    main {
+        flex: 1;
+        margin: 20px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 1200px; /* Constrain max-width to prevent overflow */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .travel-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 70vh; /* Ensure the image doesn't exceed 70% of the viewport height */
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
 }

@@ -28,13 +28,17 @@ public class SecurityConfig {
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/home", true)
-                                .failureUrl("/index?error=true")
+                                .failureUrl("/login?error=true")
                 )
                 .logout(logout ->
                         logout
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedPage("/403")
                 )
                 .build();
     }

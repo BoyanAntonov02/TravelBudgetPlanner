@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Budget Planner - Home</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <header>
-    <h1>Welcome, <span th:text="${#authentication.name}">User</span>!</h1>
+    <h1>User Profile</h1>
     <nav>
         <a href="/dashboard">Dashboard</a>
         <a href="/trips/create">Create New Trip</a>
@@ -19,8 +19,10 @@
     </nav>
 </header>
 <main>
-    <section>
-        <img src="/images/travel.jpg" alt="Travel" class="travel-image">
+    <section class="profile-info">
+        <h2>Profile Information</h2>
+        <p><strong>Username:</strong> <span th:text="${user.username}">Username</span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
     </section>
 </main>
 <footer>
