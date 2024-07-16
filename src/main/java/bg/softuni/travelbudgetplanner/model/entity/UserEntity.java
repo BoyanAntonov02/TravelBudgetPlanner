@@ -3,6 +3,9 @@ package bg.softuni.travelbudgetplanner.model.entity;
 import bg.softuni.travelbudgetplanner.model.entity.UserRole;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -21,9 +24,15 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserRole role = UserRole.USER; // Default role
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    private List<UserRolesEntity> roles = new ArrayList<>();
 
     // Getters and Setters
 
@@ -59,11 +68,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRolesEntity> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRoles(List<UserRolesEntity> roles) {
+        this.roles = roles;
     }
 }

@@ -7,7 +7,8 @@ import java.util.Collection;
 
 public class TravelUserDetails extends User {
 
-    public TravelUserDetails(String username, String password,  Collection<? extends GrantedAuthority> authorities){
+    public TravelUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
+
 }

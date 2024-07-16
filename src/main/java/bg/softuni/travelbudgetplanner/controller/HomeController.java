@@ -16,7 +16,7 @@ public class HomeController {
 
 
         if (userDetails instanceof TravelUserDetails travelUserDetails) {
-            model.addAttribute("welcomeMessage", userDetails.getPassword());
+            model.addAttribute("welcomeMessage", userDetails.getUsername());
         } else {
             model.addAttribute("welcomeMessage", "Anonymous");
         }

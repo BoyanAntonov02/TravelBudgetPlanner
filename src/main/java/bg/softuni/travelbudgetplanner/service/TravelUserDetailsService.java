@@ -1,7 +1,12 @@
 package bg.softuni.travelbudgetplanner.service;
 
 import bg.softuni.travelbudgetplanner.model.entity.UserEntity;
+import bg.softuni.travelbudgetplanner.model.entity.UserRole;
+import bg.softuni.travelbudgetplanner.model.entity.UserRolesEntity;
 import bg.softuni.travelbudgetplanner.repository.UserRepository;
+import bg.softuni.travelbudgetplanner.user.TravelUserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,11 +34,17 @@ public class TravelUserDetailsService implements UserDetailsService {
     }
 
     private static UserDetails map(UserEntity userEntity) {
-        return User
-                .withUsername(userEntity.getUsername())
-                .password(userEntity.getPassword())
-                .authorities(List.of())//TODO
-                .disabled(false)
-                .build();
+
+        return new TravelUserDetails(
+                userEntity.getUsername(),
+                userEntity.getPassword(),
+                userEntity.getRoles().stream().map(UserRolesEntity::getUserRole).map(TravelUserDetailsService::map).toList()
+        );
+    }
+
+    private static GrantedAuthority map(UserRole role) {
+        return new SimpleGrantedAuthority(
+                "ROLE_" + role
+        );
     }
 }
