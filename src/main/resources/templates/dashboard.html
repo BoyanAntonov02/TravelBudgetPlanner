@@ -21,19 +21,20 @@
     <section>
         <h2>Your Trips</h2>
         <div class="list-group">
-            <div th:each="trip : ${trips}" class="list-group-item">
+            <div th:each="trip : ${trips}" class="trip-list-item">
                 <h3 th:text="${trip.destination}" class="trip-title"></h3>
                 <p>
-                    <span th:text="'Start Date: ' + ${trip.startDate}"></span><br>
-                    <span th:text="'End Date: ' + ${trip.endDate}"></span><br>
+                    <span class="date" th:text="'Start Date: ' + ${trip.startDate}"></span><br>
+                    <span class="date" th:text="'End Date: ' + ${trip.endDate}"></span><br>
                     <span th:text="'Budget: $' + ${trip.budget}"></span>
                 </p>
                 <div class="button-group">
-                    <a th:href="@{/trips/edit/{id}(id=${trip.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/trips/edit/{id}(id=${trip.id})}" class="btn btn-primary">Edit Trip</a>
                     <form th:action="@{/trips/delete/{id}(id=${trip.id})}" method="post" style="display:inline;">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete Trip</button>
                     </form>
+                    <a th:href="@{/trips/view/{id}(id=${trip.id})}" class="btn btn-secondary">View Trip</a>
                 </div>
             </div>
         </div>

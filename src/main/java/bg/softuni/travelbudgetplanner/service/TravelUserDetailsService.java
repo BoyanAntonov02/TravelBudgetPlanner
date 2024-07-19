@@ -1,19 +1,15 @@
 package bg.softuni.travelbudgetplanner.service;
 
 import bg.softuni.travelbudgetplanner.model.entity.UserEntity;
-import bg.softuni.travelbudgetplanner.model.entity.UserRole;
+import bg.softuni.travelbudgetplanner.model.enums.UserRole;
 import bg.softuni.travelbudgetplanner.model.entity.UserRolesEntity;
 import bg.softuni.travelbudgetplanner.repository.UserRepository;
 import bg.softuni.travelbudgetplanner.user.TravelUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.List;
-import java.util.Optional;
 
 public class TravelUserDetailsService implements UserDetailsService {
 

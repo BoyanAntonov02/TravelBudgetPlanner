@@ -1,33 +1,44 @@
-<!-- create-expense.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Expense</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <header>
     <h1>Create Expense</h1>
+    <nav>
+        <a href="/home">Home</a>
+        <a th:href="@{/dashboard}">Dashboard</a>
+    </nav>
 </header>
 <main>
-    <form action="/trips/{tripId}/expenses" method="post">
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required>
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
-        <label for="category">Category:</label>
-        <select id="category" name="category">
-            <option value="transportation">Transportation</option>
-            <option value="accommodation">Accommodation</option>
-            <option value="food">Food</option>
-            <option value="entertainment">Entertainment</option>
-        </select>
-        <button type="submit">Add Expense</button>
-    </form>
+    <section>
+        <form th:action="@{/expenses/create/{tripId}(tripId=${tripId})}" th:method="post" th:object="${expenseData}">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:field="*{description}" required>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" th:field="*{amount}"  required>
+            <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Amount Error</div>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" th:field="*{date}" required>
+            <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</div>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" th:field="*{category}" required>
+                <option th:each="category : ${T(bg.softuni.travelbudgetplanner.model.enums.ExpenseCategory).values()}"
+                        th:value="${category}" th:text="${category}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</div>
+
+            <button type="submit">Create Expense</button>
+        </form>
+    </section>
 </main>
 <footer>
     <p>&copy; 2024 Travel Budget Planner</p>

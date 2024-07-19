@@ -1,5 +1,6 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
+import bg.softuni.travelbudgetplanner.model.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 

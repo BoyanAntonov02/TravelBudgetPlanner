@@ -37,19 +37,50 @@ nav a:hover {
     text-decoration: underline;
 }
 
-
 section {
     text-align: center;
 }
 
 section h2 {
     color: #264653;
-    font-size: 1.5em;
+    font-size: 2em; /* Increased size for trip name */
+    margin-bottom: 10px;
 }
 
 section p {
     color: #264653;
     font-size: 1.2em;
+}
+
+.trip-details,
+.trip-list-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.trip-details h3,
+.trip-list-item h3 {
+    color: #264653;
+    font-size: 1.5em; /* Increased size for expense name */
+    margin-bottom: 10px;
+}
+
+.trip-details p,
+.trip-list-item p {
+    color: #264653;
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+.trip-details .date,
+.trip-list-item .date {
+    color: #2a9d8f;
+    font-weight: bold;
 }
 
 form {
@@ -169,5 +200,4 @@ footer {
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
 }

@@ -14,76 +14,24 @@
         <a href="/dashboard">Dashboard</a>
     </nav>
 </header>
-<main class="p-5 align-content-center bg-blur my-register-div">
-    <div class="d-flex justify-content-center">
-        <div class="row g-3 align-items-center">
-            <form
-                    th:action="@{/trips}"
-                    th:method="POST"
-                    th:object="${tripData}"
-            >
-                <div>
-                    <div class="col-auto">
-                        <label for="destination" class="col-form-label ">Destination</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="text"
-                               name="destination"
-                               required minlength="3" maxlength="50"
-                               id="destination"
-                               class="form-control"
-                               th:field="*{destination}"
-                        >
-                    </div>
-                </div>
-                <div>
-                    <div class="col-auto">
-                        <label for="startDate" class="col-form-label ">Start Date</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date"
-                               name="startDate"
-                               required
-                               id="startDate"
-                               class="form-control"
-                               th:field="*{startDate}"
-                        >
-                    </div>
-                </div>
-                <div>
-                    <div class="col-auto">
-                        <label for="endDate" class="col-form-label ">End Date</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date"
-                               name="endDate"
-                               required
-                               id="endDate"
-                               class="form-control"
-                               th:field="*{endDate}"
-                        >
-                    </div>
-                </div>
-                <div>
-                    <div class="col-auto">
-                        <label for="budget" class="col-form-label ">Budget</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="number"
-                               name="budget"
-                               required min="1"
-                               id="budget"
-                               class="form-control"
-                               th:field="*{budget}"
-                        >
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center mt-2">
-                    <button class="btn btn-primary btn-block w-50" type="submit">Create Trip</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<main>
+    <section>
+        <form th:action="@{/trips}" th:method="POST" th:object="${tripData}">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" th:field="*{destination}" required>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" th:field="*{startDate}" required>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" th:field="*{endDate}" required>
+
+            <label for="budget">Budget:</label>
+            <input type="number" id="budget" name="budget" th:field="*{budget}" required>
+
+            <button type="submit">Create Trip</button>
+        </form>
+    </section>
 </main>
 <footer>
     <p>&copy; 2024 Travel Budget Planner</p>

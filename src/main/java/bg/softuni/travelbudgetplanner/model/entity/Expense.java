@@ -1,5 +1,6 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
+import bg.softuni.travelbudgetplanner.model.enums.ExpenseCategory;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

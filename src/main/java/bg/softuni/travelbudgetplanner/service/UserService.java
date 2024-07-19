@@ -1,10 +1,8 @@
 package bg.softuni.travelbudgetplanner.service;
 
 import bg.softuni.travelbudgetplanner.config.UserSession;
-import bg.softuni.travelbudgetplanner.model.dto.UserLoginDTO;
 import bg.softuni.travelbudgetplanner.model.dto.UserRegisterDTO;
 import bg.softuni.travelbudgetplanner.model.entity.UserEntity;
-import bg.softuni.travelbudgetplanner.model.entity.UserRole;
 import bg.softuni.travelbudgetplanner.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

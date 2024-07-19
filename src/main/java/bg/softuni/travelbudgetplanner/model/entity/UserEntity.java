@@ -1,6 +1,5 @@
 package bg.softuni.travelbudgetplanner.model.entity;
 
-import bg.softuni.travelbudgetplanner.model.entity.UserRole;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

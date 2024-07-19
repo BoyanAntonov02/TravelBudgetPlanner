@@ -1,4 +1,4 @@
-package bg.softuni.travelbudgetplanner.model.entity;
+package bg.softuni.travelbudgetplanner.model.enums;
 
 public enum UserRole {
     USER,

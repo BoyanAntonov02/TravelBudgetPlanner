@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header>
+    <h1>Trip Details</h1>
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class="nav-link">Logout</button>
+        </form>
+    </nav>
+</header>
+<main>
+    <section>
+        <div class="trip-details">
+            <h2 th:text="${trip.destination}"></h2>
+            <p class="date" th:text="'Start Date: ' + ${trip.startDate}"></p>
+            <p class="date" th:text="'End Date: ' + ${trip.endDate}"></p>
+            <p th:text="'Budget: $' + ${trip.budget}"></p>
+
+            <div class="button-group">
+                <a th:href="@{/trips/edit/{id}(id=${trip.id})}" class="btn btn-primary">Edit Trip</a>
+                <form th:action="@{/trips/delete/{id}(id=${trip.id})}" method="post" style="display:inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-danger">Delete Trip</button>
+                </form>
+            </div>
+
+            <h3>Expenses</h3>
+            <a th:href="@{/expenses/create/{tripId}(tripId=${trip.id})}" class="btn btn-primary">Add Expense</a>
+            <div class="list-group">
+                <div th:each="expense : ${trip.expenses}" class="list-group-item">
+                    <h3 th:text="${expense.description}" class="expense-title"></h3>
+                    <p>
+                        <span class="date" th:text="'Amount: $' + ${expense.amount}"></span><br>
+                        <span class="date" th:text="'Date: ' + ${expense.date}"></span><br>
+                        <span th:text="'Category: ' + ${expense.category}"></span>
+                    </p>
+                    <div class="button-group">
+                        <a th:href="@{/expenses/edit/{id}(id=${expense.id})}" class="btn btn-primary">Edit</a>
+                        <form th:action="@{/expenses/delete/{id}(id=${expense.id})}" method="post" style="display:inline;">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>

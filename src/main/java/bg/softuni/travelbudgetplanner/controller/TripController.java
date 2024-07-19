@@ -32,6 +32,22 @@ public class TripController {
         this.userService = userService;
     }
 
+    @GetMapping("/view/{id}")
+    public String viewTrip(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            logger.warning("User is not authenticated.");
+            return "redirect:/login";
+        }
+
+        Trip trip = tripService.getTripById(id);
+        if (!trip.getUser().getUsername().equals(userDetails.getUsername())) {
+            return "redirect:/dashboard";
+        }
+
+        model.addAttribute("trip", trip);
+        return "view-trip";
+    }
+
     @GetMapping("/create")
     public String createTripForm(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
