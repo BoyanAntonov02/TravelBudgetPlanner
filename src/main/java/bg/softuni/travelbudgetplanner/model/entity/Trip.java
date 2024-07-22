@@ -32,8 +32,17 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Expense> expenses;
 
-    @OneToOne(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "packing_list_id")
     private PackingList packingList;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.packingList == null) {
+            this.packingList = new PackingList();
+            this.packingList.setName("Packing List");
+        }
+    }
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Report> reports;

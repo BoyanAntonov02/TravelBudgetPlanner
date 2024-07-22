@@ -20,10 +20,10 @@
 <main>
     <section>
         <div class="trip-details">
-            <h2 th:text="${trip.destination}"></h2>
-            <p class="date" th:text="'Start Date: ' + ${trip.startDate}"></p>
-            <p class="date" th:text="'End Date: ' + ${trip.endDate}"></p>
-            <p th:text="'Budget: $' + ${trip.budget}"></p>
+            <h2 th:text="${trip.destination}">Destination</h2>
+            <p class="date" th:text="'Start Date: ' + ${trip.startDate}">Start Date</p>
+            <p class="date" th:text="'End Date: ' + ${trip.endDate}">End Date</p>
+            <p th:text="'Budget: $' + ${trip.budget}">Budget</p>
 
             <div class="button-group">
                 <a th:href="@{/trips/edit/{id}(id=${trip.id})}" class="btn btn-primary">Edit Trip</a>
@@ -33,15 +33,26 @@
                 </form>
             </div>
 
+            <h3>Packing List</h3>
+            <div th:if="${trip.packingList != null}">
+                <ul>
+                    <li th:each="item : ${trip.packingList.items}">
+                        <span th:text="${item.name}">Item Name</span> -
+                        <span th:text="${item.quantity}">Quantity</span>
+                    </li>
+                </ul>
+                <a th:href="@{/packing-lists/add-items/{packingListId}(packingListId=${trip.packingList.id})}" class="btn btn-primary">Add Items</a>
+            </div>
+
             <h3>Expenses</h3>
             <a th:href="@{/expenses/create/{tripId}(tripId=${trip.id})}" class="btn btn-primary">Add Expense</a>
             <div class="list-group">
                 <div th:each="expense : ${trip.expenses}" class="list-group-item">
-                    <h3 th:text="${expense.description}" class="expense-title"></h3>
+                    <h3 th:text="${expense.description}" class="expense-title">Description</h3>
                     <p>
-                        <span class="date" th:text="'Amount: $' + ${expense.amount}"></span><br>
-                        <span class="date" th:text="'Date: ' + ${expense.date}"></span><br>
-                        <span th:text="'Category: ' + ${expense.category}"></span>
+                        <span class="date" th:text="'Amount: $' + ${expense.amount}">Amount</span><br>
+                        <span class="date" th:text="'Date: ' + ${expense.date}">Date</span><br>
+                        <span th:text="'Category: ' + ${expense.category}">Category</span>
                     </p>
                     <div class="button-group">
                         <a th:href="@{/expenses/edit/{id}(id=${expense.id})}" class="btn btn-primary">Edit</a>
@@ -53,7 +64,9 @@
                 </div>
             </div>
 
-
+            <div class="button-group">
+                <a th:href="@{/reports/create/{tripId}(tripId=${trip.id})}" class="btn btn-secondary">Create/View Report</a>
+            </div>
         </div>
     </section>
 </main>

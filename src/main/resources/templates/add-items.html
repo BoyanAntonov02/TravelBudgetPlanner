@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Packing Items</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header>
+    <h1>Add Packing Items</h1>
+</header>
+<main>
+    <section>
+        <form th:action="@{/packing-lists/add-items/{packingListId}(packingListId=${packingListId})}" method="post" th:object="${packingItem}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <div>
+                <label for="name">Item Name</label>
+                <input type="text" id="name" th:field="*{name}" placeholder="Enter item name"/>
+            </div>
+            <div>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" th:field="*{quantity}" placeholder="Enter quantity"/>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Add Item</button>
+            </div>
+        </form>
+        <div th:if="${successMessage}">
+            <p th:text="${successMessage}" class="success-message"></p>
+        </div>
+        <div th:if="${errorMessage}">
+            <p th:text="${errorMessage}" class="error-message"></p>
+        </div>
+        <a th:href="@{/trips/view/{tripId}(tripId=${packingList.trip.id})}" class="btn btn-secondary">Back to Trip</a>
+    </section>
+</main>
+</body>
+</html>

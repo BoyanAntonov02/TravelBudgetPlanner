@@ -16,7 +16,7 @@ public class ExpenseDTO {
     @Positive
     private Double amount;
 
-    @NotNull
+    @NotBlank
     private String date;
 
     @NotNull

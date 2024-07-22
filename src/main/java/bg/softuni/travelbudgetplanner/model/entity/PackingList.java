@@ -2,6 +2,8 @@ package bg.softuni.travelbudgetplanner.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,12 +17,11 @@ public class PackingList {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "trip_id")
-    private Trip trip;
-
     @OneToMany(mappedBy = "packingList", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PackingItem> items;
+    private List<PackingItem> items = new ArrayList<>();
+
+    @OneToOne(mappedBy = "packingList")
+    private Trip trip;
 
     // Getters and Setters
 
@@ -48,11 +49,11 @@ public class PackingList {
         this.trip = trip;
     }
 
-    public Set<PackingItem> getItems() {
+    public List<PackingItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<PackingItem> items) {
+    public void setItems(List<PackingItem> items) {
         this.items = items;
     }
 }

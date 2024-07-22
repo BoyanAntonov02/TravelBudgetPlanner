@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report View</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header>
+    <h1>Report Details</h1>
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/trips/create">Create Trip</a>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Report</h2>
+        <div>
+            <p><strong>Trip:</strong> <span th:text="${report.trip.destination}">Destination</span></p>
+            <p><strong>Start Date:</strong> <span th:text="${report.startDate}">Start Date</span></p>
+            <p><strong>End Date:</strong> <span th:text="${report.endDate}">End Date</span></p>
+            <p><strong>Total Expenses:</strong> <span th:text="${report.totalExpenses}">Total Expenses</span></p>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>

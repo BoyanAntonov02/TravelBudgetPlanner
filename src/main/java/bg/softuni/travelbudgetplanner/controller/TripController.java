@@ -32,6 +32,16 @@ public class TripController {
         this.userService = userService;
     }
 
+    @GetMapping("/trips/view/{tripId}")
+    public String viewTrip(@PathVariable Long tripId, Model model) {
+        Trip trip = tripService.findById(tripId);
+        if (trip == null) {
+            return "redirect:/dashboard";
+        }
+        model.addAttribute("trip", trip);
+        return "view-trip";
+    }
+
     @GetMapping("/view/{id}")
     public String viewTrip(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {

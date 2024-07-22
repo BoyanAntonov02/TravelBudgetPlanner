@@ -22,6 +22,9 @@ public class TripService {
         return tripRepository.save(trip);
     }
 
+    public Trip findById(Long id) {
+        return tripRepository.findById(id).orElse(null);
+    }
 
     public Trip getTripById(Long id) {
         return tripRepository.findById(id)
