@@ -29,6 +29,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/currencies")
+    public String getCurrenciesPage() {
+        return "currencies";
+    }
+
 //    @GetMapping("/dashboard")
 //    public String dashboard(Model model) {
 //        return "dashboard";

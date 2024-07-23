@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currencies</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2a9d8f;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex: 1;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1, h2 {
+            color: #264653;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3e7;
+            border: 1px solid #d0e0d0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .butterfly {
+            background-image: url('https://example.com/butterfly.png'); /* Replace with your butterfly image URL */
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            background-size: contain;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2a9d8f;
+            color: white;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            main {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            table, th, td {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            axios.get('/api/currencies')
+                .then(function(response) {
+                    const rates = response.data;
+                    const popularCurrencies = ["EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "HKD", "NZD", "SEK", "KRW", "SGD", "NOK", "MXN", "INR"];
+                    const ratesTable = document.getElementById('ratesTable');
+                    let count = 0;
+                    for (const currency of popularCurrencies) {
+                        if (rates[currency]) {
+                            const row = ratesTable.insertRow();
+                            const cell1 = row.insertCell(0);
+                            const cell2 = row.insertCell(1);
+                            cell1.innerHTML = currency;
+                            cell2.innerHTML = rates[currency].toFixed(2);
+                            count++;
+                        }
+                        if (count >= 15) break;
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error fetching exchange rates:', error);
+                });
+        });
+    </script>
+</head>
+<body class="butterfly">
+<header>
+    <h1>Currencies</h1>
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/trips/create">Create Trip</a>
+        <a href="/currencies">Currencies</a>
+    </nav>
+</header>
+<main>
+    <section class="info">
+        <p>Exchange rates for 1 USD equivalent to:</p>
+    </section>
+    <section>
+        <h2>Exchange Rates</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Currency</th>
+                <th>Rate</th>
+            </tr>
+            </thead>
+            <tbody id="ratesTable">
+
+            </tbody>
+        </table>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Travel Budget Planner</p>
+</footer>
+</body>
+</html>

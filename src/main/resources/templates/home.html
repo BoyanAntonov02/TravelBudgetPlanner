@@ -12,6 +12,7 @@
     <nav>
         <a href="/dashboard">Dashboard</a>
         <a href="/trips/create">Create New Trip</a>
+        <a href="/currencies">Currencies</a>
         <form th:action="@{/logout}" method="post" style="display:inline;">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <button type="submit" class="nav-link">Logout</button>
