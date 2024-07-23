@@ -2,6 +2,7 @@ package bg.softuni.travelbudgetplanner.controller;
 
 import bg.softuni.travelbudgetplanner.model.entity.Report;
 import bg.softuni.travelbudgetplanner.service.ReportService;
+import bg.softuni.travelbudgetplanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,12 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/reports")
 public class ReportController {
 
+    private static final Logger logger = Logger.getLogger(ReportController.class.getName());
+    @Autowired
     private final ReportService reportService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     public ReportController(ReportService reportService) {
@@ -34,7 +40,12 @@ public class ReportController {
     }
 
     @PostMapping("/create")
-    public String generateReport(@RequestParam Long userId, @RequestParam Long tripId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, Model model) {
+    public String generateReport(@RequestParam Long userId, @RequestParam Long tripId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null || !userService.isAdmin(userDetails)) {
+            logger.warning("User is not authenticated or not an admin.");
+            return "redirect:/login";
+        }
+
         double totalExpenses = reportService.calculateTotalExpenses(tripId, startDate, endDate);
         Report report = reportService.createReport(userId, tripId, startDate, endDate, totalExpenses);
         return "redirect:/reports/view/" + report.getId();

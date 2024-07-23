@@ -64,7 +64,8 @@
                 </div>
             </div>
 
-            <div class="button-group">
+            <!-- This div should be visible only to admins -->
+            <div th:if="${isAdmin}" class="button-group">
                 <a th:href="@{/reports/create/{tripId}(tripId=${trip.id})}" class="btn btn-secondary">Create/View Report</a>
             </div>
         </div>

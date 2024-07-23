@@ -50,11 +50,12 @@ public class TripController {
         }
 
         Trip trip = tripService.getTripById(id);
-        if (!trip.getUser().getUsername().equals(userDetails.getUsername())) {
+        if (!trip.getUser().getUsername().equals(userDetails.getUsername()) && !userService.isAdmin(userDetails)) {
             return "redirect:/dashboard";
         }
 
         model.addAttribute("trip", trip);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         return "view-trip";
     }
 
@@ -160,4 +161,6 @@ public class TripController {
 
         return "redirect:/dashboard";
     }
+
+
 }
