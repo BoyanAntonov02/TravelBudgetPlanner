@@ -6,30 +6,68 @@
     <title>Create Trip</title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
+
+<style> .dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: #2a9d8f;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #2a9d8f;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
 <body>
 <header>
-    <h1>Create Trip</h1>
+    <h1 th:text="#{header.createTrip}">Create Trip</h1>
     <nav>
-        <a href="/home">Home</a>
-        <a href="/dashboard">Dashboard</a>
+        <a href="/home" th:text="#{nav.home}">Home</a>
+        <a href="/dashboard" th:text="#{nav.dashboard}">Dashboard</a>
+        <div class="dropdown">
+            <span th:text="#{nav.language}" class="dropdown-toggle">Language &#9662;</span>
+            <div class="dropdown-content">
+                <a href="?lang=en" th:text="#{nav.english}">English</a>
+                <a href="?lang=bg" th:text="#{nav.bulgarian}">Bulgarian</a>
+            </div>
+        </div>
     </nav>
 </header>
 <main>
     <section>
         <form th:action="@{/trips}" th:method="POST" th:object="${tripData}">
-            <label for="destination">Destination:</label>
+            <label for="destination" th:text="#{form.destination}">Destination:</label>
             <input type="text" id="destination" name="destination" th:field="*{destination}" required>
 
-            <label for="startDate">Start Date:</label>
+            <label for="startDate" th:text="#{form.startDate}">Start Date:</label>
             <input type="date" id="startDate" name="startDate" th:field="*{startDate}" required>
 
-            <label for="endDate">End Date:</label>
+            <label for="endDate" th:text="#{form.endDate}">End Date:</label>
             <input type="date" id="endDate" name="endDate" th:field="*{endDate}" required>
 
-            <label for="budget">Budget:</label>
+            <label for="budget" th:text="#{form.budget}">Budget:</label>
             <input type="number" id="budget" name="budget" th:field="*{budget}" required>
 
-            <button type="submit">Create Trip</button>
+            <button type="submit" th:text="#{form.createTripButton}">Create Trip</button>
         </form>
     </section>
 </main>
