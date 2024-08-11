@@ -25,7 +25,6 @@ public class CurrencyController {
         if (response != null && response.containsKey("rates")) {
             Map<String, Object> rawRates = (Map<String, Object>) response.get("rates");
             for (Map.Entry<String, Object> entry : rawRates.entrySet()) {
-                // Ensure we only deal with Double values
                 rates.put(entry.getKey(), ((Number) entry.getValue()).doubleValue());
             }
         }

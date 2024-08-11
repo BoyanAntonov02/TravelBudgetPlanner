@@ -63,7 +63,7 @@ public class ReportService {
             if (userOptional.isPresent()) {
                 return userOptional.get().getId();
             } else {
-                return null; // or throw an exception if user not found
+                return null;
             }
         } else {
             return null;
